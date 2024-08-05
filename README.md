@@ -1,6 +1,6 @@
 # tools
-Some easy and useful web tools using Node.js and JavaScript.
+Some easy and useful web tools.
 
 - Screenshot Page
-
 - Sitemap Generator
+- MacBook Optimizer
