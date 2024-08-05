@@ -1,9 +1,10 @@
 #!/bin/zsh
 
-# Directory della cache dell'utente
-CACHE_DIR="/Users/andbardii/Library/Caches"
 
 # Pulizia della cache dell'utente
+USER="andbardii"
+CACHE_DIR="/Users/$USER/Library/Caches"
+
 echo "Svuotamento della cache in $CACHE_DIR..."
 find $CACHE_DIR -type f -delete
 find $CACHE_DIR -type d -empty -delete
