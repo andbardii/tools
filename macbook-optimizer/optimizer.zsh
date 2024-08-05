@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 # Pulizia della cache dell'utente
 USER="andbardii"
 CACHE_DIR="/Users/$USER/Library/Caches"
