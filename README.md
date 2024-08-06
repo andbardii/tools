@@ -9,7 +9,7 @@
 
 ## screenshot-page
 - screenshots.js
-  (Screenshot web pages with important height)
+Screenshot web pages with important height
 
 ## sitemap-generator
 - sitemapgenerator.js
