@@ -1,17 +1,20 @@
 # tools
 
 ## mabook-generics
-- new.zsh
-  [ Set environment basics for a new macbook ]
+- <b>new.zsh</b>
 
-- optimizer.zsh
-  [ Clean up for better performance ]
+Set environment basics for a new macbook
+
+- <b>optimizer.zsh</b>
+
+Clean up for better performance
 
 ## screenshot-page
-- screenshots.js
+- <b>screenshots.js</b>
 
 Screenshot web pages with important height
 
 ## sitemap-generator
-- sitemapgenerator.js
-  [ Generate simple sitemap from a given website ]
+- <b>sitemapgenerator.js</b>
+
+Generate simple sitemap from a given website
