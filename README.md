@@ -13,8 +13,3 @@ Clean up for better performance
 - <b>screenshots.js</b>
 
 Screenshot web pages with important height
-
-## sitemap-generator
-- <b>sitemapgenerator.js</b>
-
-Generate simple sitemap from a given website
