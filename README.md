@@ -2,6 +2,7 @@
 
 ## mabook-generics
 ![ZSH](https://img.shields.io/badge/zsh-%23green.svg?style=for-the-badge&logo=zsh&logoColor=white)
+![JAVASCRIPT](https://img.shields.io/badge/javascript-%23yellow.svg?style=for-the-badge&logo=javascript&logoColor=white)
 
 - <b>new.zsh</b>
 
