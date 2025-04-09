@@ -1,4 +1,4 @@
-# tools
+# Tools Collection
 
 ## mabook-generics
 ![ZSH](https://img.shields.io/badge/zsh-%23green.svg?style=for-the-badge&logo=zsh&logoColor=white)
