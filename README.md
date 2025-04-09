@@ -1,26 +1,13 @@
 # Tools Collection
+[![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
+[![Maintenance](https://img.shields.io/badge/Maintained-Yes-brightgreen)](https://github.com/OpenBrokerRemover)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen)](https://github.com/OpenBrokerRemover/pulls)
 
-## mabook-generics
-![ZSH](https://img.shields.io/badge/zsh-%23green.svg?style=for-the-badge&logo=zsh&logoColor=white)
+### Mabook Generics
+Set environment basics for a new macbook and/or clean up for better performance.
 
-- <b>new.zsh</b>
-
-Set environment basics for a new macbook
-
-- <b>optimizer.zsh</b>
-
-Clean up for better performance
-
-## screenshot-page
-![JavaScript](https://img.shields.io/badge/javascript-yellow.svg?style=for-the-badge&logo=javascript&logoColor=white)
-
-- <b>screenshots.js</b>
-
+### Screenshot Page
 Screenshot web pages with important height
 
-## sitemap-generator
-![JavaScript](https://img.shields.io/badge/javascript-yellow.svg?style=for-the-badge&logo=javascript&logoColor=white)
-
-- <b>sitemapgenerator.js</b>
-
+### Sitemap Generator
 Generate simple sitemap from a given website
