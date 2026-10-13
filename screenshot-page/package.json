@@ -1,5 +1,13 @@
 {
   "dependencies": {
-    "puppeteer": "^24.6.0"
+    "puppeteer": "^25.13.0"
+  },
+  "private": true,
+  "scripts": {
+    "start": "node screenshots.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }
