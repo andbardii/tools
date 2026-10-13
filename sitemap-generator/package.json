@@ -1,5 +1,10 @@
 {
-  "dependencies": {
-    "sitemap": "^7.1.1"
-  }
+  "name": "sitemap-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Genera sitemap XML da un elenco JSON esplicito di URL",
+  "scripts": { "start": "node sitemapgenerator.js", "test": "node --test" },
+  "engines": { "node": ">=20" },
+  "dependencies": { "sitemap": "^7.1.1" },
+  "devDependencies": { "sax": "^1.4.1" }
 }
