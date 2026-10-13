@@ -49,6 +49,6 @@ git log -- privacy-helper/
 
 Prima dell’importazione i file erano nella radice delle singole repository: un filtro sul nuovo percorso non mostra da solo tutti i commit precedenti. Usa il tag di migrazione per consultarli con i percorsi originali.
 
-Le repository sorgenti sono state eliminate dopo la verifica dell’importazione. Un’importazione Git conserva commit e file, ma non trasferisce issue, pull request e release su GitHub. Le licenze di ciascun progetto sono conservate.
+Questa raccolta è la posizione corrente dei progetti importati. Un’importazione Git conserva commit e file, ma non trasferisce issue, pull request e release su GitHub. Le licenze di ciascun progetto sono conservate.
 
-Il progetto `open-broker-remover` è stato rinominato in `privacy-helper` e integrato nella raccolta. La repository separata è stata eliminata dopo la verifica della migrazione. I nomi di database e volume Docker (`open-broker-remover.db`, `open-broker-data`) restano invariati per mantenere l’accesso ai dati già esistenti.
+Il progetto `open-broker-remover` è stato rinominato in `privacy-helper` e integrato nella raccolta. La versione corrente è mantenuta in questa raccolta. I nomi di database e volume Docker (`open-broker-remover.db`, `open-broker-data`) restano invariati per mantenere l’accesso ai dati già esistenti.

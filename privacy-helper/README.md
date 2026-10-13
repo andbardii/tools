@@ -1,6 +1,6 @@
 # Privacy Helper
 
-Strumento della raccolta [**Tools**](../README.md), in precedenza **Open Broker Remover**. La versione corrente si trova in `andbardii/tools`, cartella `privacy-helper/`; la repository separata è stata eliminata dopo la verifica della migrazione.
+Strumento della raccolta [**Tools**](../README.md), in precedenza **Open Broker Remover**. La versione corrente si trova in `andbardii/tools`, cartella `privacy-helper/`; la versione corrente è mantenuta in questa raccolta.
 
 [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
