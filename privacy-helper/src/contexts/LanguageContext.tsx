@@ -96,7 +96,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   useEffect(() => {
     // Update document language for accessibility
     document.documentElement.lang = language;
-    document.title = t('app-title') || 'Open Broker Remover';
+    document.title = t('app-title') || 'Privacy Helper';
   }, [language]);
 
   // Context value

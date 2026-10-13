@@ -5,7 +5,7 @@ export type Language = 'en' | 'it' | 'fr' | 'de' | 'es' | 'pt';
 export const translations: Record<Language, Record<string, string>> = {
   en: {
     // App title
-    'app-title': 'Open Broker Remover',
+    'app-title': 'Privacy Helper',
     // Language change
     'language-changed': 'Language changed',
     'language-changed-description': 'The application language has been changed to English',
@@ -112,8 +112,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'import-error': 'Import error',
     'logs-cleared': 'Logs cleared successfully',
     'about': 'About',
-    'about-description': 'Learn more about Open Broker Remover and its features',
-    'about-title': 'About Open Broker Remover',
+    'about-description': 'Learn more about Privacy Helper and its features',
+    'about-title': 'About Privacy Helper',
     'about-subtitle': 'A free and open-source solution for managing your personal data',
     'about-features': 'Key Features',
     'about-feature-1': 'Automated data removal requests',
@@ -137,7 +137,7 @@ export const translations: Record<Language, Record<string, string>> = {
   },
   it: {
     // App title
-    'app-title': 'Open Broker Remover',
+    'app-title': 'Privacy Helper',
     // Language change
     'language-changed': 'Lingua cambiata',
     'language-changed-description': 'La lingua dell\'applicazione è stata cambiata in Italiano',
@@ -244,8 +244,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'import-error': 'Errore di importazione',
     'logs-cleared': 'Log cancellati con successo',
     'about': 'Informazioni',
-    'about-description': 'Scopri di più su Open Broker Remover e le sue funzionalità',
-    'about-title': 'Informazioni su Open Broker Remover',
+    'about-description': 'Scopri di più su Privacy Helper e le sue funzionalità',
+    'about-title': 'Informazioni su Privacy Helper',
     'about-subtitle': 'Una soluzione gratuita e open-source per gestire i tuoi dati personali',
     'about-features': 'Funzionalità Principali',
     'about-feature-1': 'Richieste di rimozione dati automatizzate',
@@ -269,7 +269,7 @@ export const translations: Record<Language, Record<string, string>> = {
   },
   fr: {
     // App title
-    'app-title': 'Open Broker Remover',
+    'app-title': 'Privacy Helper',
     // Language change
     'language-changed': 'Langue modifiée',
     'language-changed-description': 'La langue de l\'application a été changée en Français',
@@ -376,8 +376,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'import-error': 'Erreur d\'importation',
     'logs-cleared': 'Journaux effacés avec succès',
     'about': 'À propos',
-    'about-description': 'En savoir plus sur Open Broker Remover et ses fonctionnalités',
-    'about-title': 'À propos d\'Open Broker Remover',
+    'about-description': 'En savoir plus sur Privacy Helper et ses fonctionnalités',
+    'about-title': 'À propos d\'Privacy Helper',
     'about-subtitle': 'Une solution gratuite et open-source pour gérer vos données personnelles',
     'about-features': 'Fonctionnalités Principales',
     'about-feature-1': 'Demandes de suppression de données automatisées',
@@ -401,7 +401,7 @@ export const translations: Record<Language, Record<string, string>> = {
   },
   de: {
     // App title
-    'app-title': 'Open Broker Remover',
+    'app-title': 'Privacy Helper',
     // Language change
     'language-changed': 'Sprache geändert',
     'language-changed-description': 'Die Anwendungssprache wurde auf Deutsch geändert',
@@ -508,8 +508,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'import-error': 'Importfehler',
     'logs-cleared': 'Protokolle erfolgreich gelöscht',
     'about': 'Über',
-    'about-description': 'Erfahren Sie mehr über Open Broker Remover und seine Funktionen',
-    'about-title': 'Über Open Broker Remover',
+    'about-description': 'Erfahren Sie mehr über Privacy Helper und seine Funktionen',
+    'about-title': 'Über Privacy Helper',
     'about-subtitle': 'Eine kostenlose und Open-Source-Lösung zur Verwaltung Ihrer persönlichen Daten',
     'about-features': 'Hauptfunktionen',
     'about-feature-1': 'Automatisierte Datenlöschungsanfragen',
@@ -533,7 +533,7 @@ export const translations: Record<Language, Record<string, string>> = {
   },
   es: {
     // App title
-    'app-title': 'Open Broker Remover',
+    'app-title': 'Privacy Helper',
     // Language change
     'language-changed': 'Idioma cambiado',
     'language-changed-description': 'El idioma de la aplicación ha sido cambiado a Español',
@@ -640,8 +640,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'import-error': 'Error de importación',
     'logs-cleared': 'Registros borrados correctamente',
     'about': 'Acerca de',
-    'about-description': 'Conozca más sobre Open Broker Remover y sus características',
-    'about-title': 'Acerca de Open Broker Remover',
+    'about-description': 'Conozca más sobre Privacy Helper y sus características',
+    'about-title': 'Acerca de Privacy Helper',
     'about-subtitle': 'Una solución gratuita y de código abierto para gestionar sus datos personales',
     'about-features': 'Características Principales',
     'about-feature-1': 'Solicitudes automatizadas de eliminación de datos',
@@ -665,7 +665,7 @@ export const translations: Record<Language, Record<string, string>> = {
   },
   pt: {
     // App title
-    'app-title': 'Open Broker Remover',
+    'app-title': 'Privacy Helper',
     // Language change
     'language-changed': 'Idioma alterado',
     'language-changed-description': 'O idioma da aplicação foi alterado para Português',
@@ -772,8 +772,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'import-error': 'Erro de importação',
     'logs-cleared': 'Registros limpos com sucesso',
     'about': 'Sobre',
-    'about-description': 'Saiba mais sobre o Open Broker Remover e seus recursos',
-    'about-title': 'Sobre o Open Broker Remover',
+    'about-description': 'Saiba mais sobre o Privacy Helper e seus recursos',
+    'about-title': 'Sobre o Privacy Helper',
     'about-subtitle': 'Uma solução gratuita e de código aberto para gerenciar seus dados pessoais',
     'about-features': 'Recursos Principais',
     'about-feature-1': 'Solicitações automatizadas de remoção de dados',

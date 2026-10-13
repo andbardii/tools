@@ -1,25 +1,13 @@
-# Security Policy
+# Sicurezza di Privacy Helper
 
-## Reporting a Vulnerability
+Privacy Helper fa parte di [andbardii/tools](https://github.com/andbardii/tools), nella cartella `privacy-helper/`.
 
-Se trovi una vulnerabilità o hai dubbi relativi alla sicurezza del progetto, ti preghiamo di segnalarlo il prima possibile.
+## Segnalazioni
 
-### Come Segnalare
-- Crea una issue nel repository GitHub utilizzando l'etichetta **"security alert"**.
-- Se preferisci una segnalazione privata, puoi utilizzare la funzionalità **Private Vulnerability Reporting** abilitata nel repository.
+Per segnalare una vulnerabilità, usa la sezione **Security** della repository Tools e la funzione di segnalazione privata, se disponibile. Non pubblicare credenziali, dati personali o dettagli sfruttabili in una issue pubblica. Le issue per problemi non sensibili vanno aperte nella repository Tools, indicando lo strumento e i passaggi per riprodurre il problema.
 
-### Linee Guida
-- Fornisci una descrizione dettagliata della vulnerabilità o del problema di sicurezza.
-- Indica i passaggi per replicare il problema (se possibile).
-- Includi qualsiasi suggerimento o patch che possa aiutare nella risoluzione.
+## Dati locali
 
-## Monitoraggio delle Dipendenze
-Il progetto utilizza **Dependabot** per monitorare le vulnerabilità nelle dipendenze. Gli aggiornamenti di sicurezza vengono esaminati regolarmente per garantire che il software sia aggiornato e sicuro.
+Il database e le chiavi possono contenere dati sensibili. Non aggiungere a Git file `.env`, database, esportazioni personali, chiavi di crittografia o backup. Conserva separatamente una copia sicura dei dati e delle chiavi prima di modificare l’installazione.
 
-## Scansione del Codice
-Sono abilitati i controlli automatici tramite **Code Scanning** per rilevare vulnerabilità comuni e errori di codice. Ogni modifica al codice viene analizzata per garantire un livello di sicurezza elevato.
-
-## Collaborazione della Community
-Siamo aperti ai contributi della community e incoraggiamo la segnalazione di problemi di sicurezza. Ogni suggerimento o modifica che possa migliorare la sicurezza del progetto è il benvenuto!
-
-Grazie per contribuire a mantenere Open Broker Remover sicuro per tutti.
+Il cambio di nome da Open Broker Remover a Privacy Helper conserva i nomi esistenti del database e del volume Docker, come descritto nel [README](README.md).

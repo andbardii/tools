@@ -24,7 +24,7 @@ const DataManagementPanel: React.FC = () => {
       const a = document.createElement('a');
       const timestamp = new Date().toISOString().replace(/:/g, '-').substring(0, 19);
       a.href = url;
-      a.download = `open-broker-remover-export-${timestamp}.json`;
+      a.download = `privacy-helper-export-${timestamp}.json`;
       document.body.appendChild(a);
       a.click();
       

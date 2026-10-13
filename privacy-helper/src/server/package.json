@@ -1,7 +1,7 @@
 {
-  "name": "open-broker-remover-server",
+  "name": "privacy-helper-server",
   "version": "1.0.0",
-  "description": "Server for Open Broker Remover - a tool to remove personal data from data brokers",
+  "description": "Server for Privacy Helper - a tool to request personal data removal from data brokers",
   "main": "index.js",
   "scripts": {
     "build": "tsc",

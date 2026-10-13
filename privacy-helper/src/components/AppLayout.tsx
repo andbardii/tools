@@ -63,7 +63,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({
               {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
             </Button>
           )}
-          <h1 className="text-xl font-bold">Open Broker Remover</h1>
+          <h1 className="text-xl font-bold">Privacy Helper</h1>
         </div>
         <div className="flex items-center">
           <LanguageSwitcher />

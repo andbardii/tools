@@ -1,11 +1,11 @@
-# Open Broker Remover
+# Privacy Helper
 
-[![Node.js](https://img.shields.io/badge/Node.js-16%2B-green)](https://nodejs.org/)
+Strumento della raccolta [**Tools**](../README.md), in precedenza **Open Broker Remover**. La versione corrente si trova in `andbardii/tools`, cartella `privacy-helper/`; la repository separata è conservata come archivio storico.
+
+[![React](https://img.shields.io/badge/React-18-blue)](https://react.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
-[![Maintenance](https://img.shields.io/badge/Maintained-Yes-brightgreen)]()
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen)]()
 
-Open Broker Remover è un progetto open-source in continuo sviluppo, nato per essere uno strumento gratuito e accessibile a chiunque. L'obiettivo è consentire la rimozione dei dati personali dai data broker in modo completamente locale e sicuro. Il progetto è pensato per garantire la massima privacy, evitando l'utilizzo di servizi cloud e mantenendo il controllo completo sui dati personali.
+Privacy Helper è un progetto open-source in continuo sviluppo, nato per essere uno strumento gratuito e accessibile a chiunque. L'obiettivo è consentire la rimozione dei dati personali dai data broker con gestione locale dei dati. I dati dell’applicazione sono gestiti localmente; le richieste ai data broker possono richiedere comunicazioni esterne.
 
 ### 🛠️ In fase di sviluppo
 Il progetto è ancora in fase di sviluppo ed è nato dal desiderio di costruire qualcosa di utile nel tempo extra. Ogni contributo, suggerimento o richiesta è non solo ben accetto, ma incoraggiato! Apri una pull request o crea una issue per proporre modifiche, aggiungere funzionalità o segnalare bug.
@@ -21,11 +21,11 @@ Il progetto è ancora in fase di sviluppo ed è nato dal desiderio di costruire 
 
 ## Funzionalità Principali
 - **Richiesta di Eliminazione Dati**: Gestisce automaticamente le richieste di cancellazione dei dati personali verso vari data broker.
-- **Esecuzione in Locale**: Nessun dato viene inviato a server remoti, garantendo la totale privacy.
+- **Esecuzione in Locale**: Frontend, backend e database possono essere eseguiti sul proprio computer.
 - **Gestione Efficiente**: Ottimizzazione dei processi per garantire velocità e affidabilità.
 - **Compatibilità Multipiattaforma**: Supporta ambienti Windows, macOS e Linux tramite Docker.
 - **Persistenza dei Dati**: Utilizza SQLite per salvare i dati in modo locale e sicuro.
-- **Crittografia End-to-End**: Protezione dei dati sensibili con crittografia AES-256-GCM e gestione sicura delle chiavi.
+- **Crittografia dei dati locali**: Protezione dei dati sensibili con crittografia AES-256-GCM e gestione sicura delle chiavi.
 
 ## Tecnologie Utilizzate
 Il progetto è costruito utilizzando le seguenti tecnologie:
@@ -52,7 +52,7 @@ Il progetto è costruito utilizzando le seguenti tecnologie:
 L'applicazione include un sistema di crittografia completo per proteggere i dati sensibili memorizzati localmente:
 
 ### Caratteristiche della Crittografia
-- **Standard di Cifratura**: AES-256-GCM per una sicurezza di livello militare
+- **Standard di Cifratura**: AES-256-GCM per i dati gestiti dal sistema di crittografia
 - **Gestione delle Chiavi**: Generazione sicura e storage isolato delle chiavi di crittografia
 - **Validazione delle Chiavi**: Test automatico per garantire l'integrità delle chiavi
 - **Persistenza Sicura**: Le chiavi vengono salvate in volumi Docker isolati con permessi restrittivi
@@ -116,11 +116,11 @@ L'applicazione può essere facilmente eseguita utilizzando Docker, che incapsula
 2. **Avvio dell'applicazione**:
    ```sh
    # Clona il repository
-   git clone https://github.com/open-broker-remover/open-broker-remover.git
-   cd open-broker-remover
+   git clone https://github.com/andbardii/tools.git
+   cd tools/privacy-helper
 
    # Avvia l'applicazione con Docker Compose
-   docker-compose up -d
+   docker compose up -d --build
    ```
 
 3. **Accesso all'applicazione**:
@@ -131,7 +131,7 @@ L'applicazione può essere facilmente eseguita utilizzando Docker, che incapsula
 
 5. **Sicurezza e Monitoraggio del Container**:
    - L'applicazione viene eseguita come utente non-root per una maggiore sicurezza
-   - Il container è limitato a connettersi solo a localhost (127.0.0.1)
+   - La porta dell’applicazione è esposta sul computer host solo su localhost (127.0.0.1)
    - Le intestazioni di sicurezza HTTP sono configurate per prevenire attacchi comuni
    - Health check automatico ogni 30 secondi per monitorare lo stato dell'applicazione
    - Limiti di risorse configurati per garantire prestazioni stabili:
@@ -161,25 +161,28 @@ L'applicazione può essere facilmente eseguita utilizzando Docker, che incapsula
 
 ## Sviluppo Locale
 
+I percorsi di seguito partono dalla directory che contiene il clone `tools/`, salvo dove indicato. Il backend usa la porta `3001`; il frontend viene avviato sulla porta `3000`, coerente con la configurazione CORS attuale.
+
 ### Setup del Frontend e del Backend separati
 Per lo sviluppo, puoi eseguire il frontend e il backend separatamente:
 
 1. **Setup del Backend**:
    ```sh
-   cd src/server
-   npm install
-   npm run dev
+   cd tools/privacy-helper/src/server
+   npm ci
+   PORT=3001 npm run dev
    ```
 
 2. **Setup del Frontend**:
    ```sh
-   # In una nuova finestra di terminale, nella directory principale
-   npm install
-   npm run dev
+   # In una nuova finestra di terminale, dalla radice di Tools
+   cd privacy-helper
+   npm ci
+   VITE_API_URL=http://localhost:3001/api npm run dev -- --port 3000
    ```
 
 3. **Variabili d'ambiente**:
-   Crea un file `.env` nella directory principale con:
+   Per il frontend puoi impostare `VITE_API_URL` nel comando sopra oppure in `tools/privacy-helper/.env` con:
    ```
    VITE_API_URL=http://localhost:3001/api
    ```
@@ -188,10 +191,11 @@ Per lo sviluppo, puoi eseguire il frontend e il backend separatamente:
 Puoi modificare il codice seguendo il classico flusso di lavoro Git o lavorando in locale.
 
 #### Metodo Classico: Fork, Clone e Pull Request
-1. **Fork del Repository**: Clicca su "Fork" nella pagina GitHub del progetto.
+1. **Fork del Repository**: Clicca su "Fork" nella pagina GitHub di [andbardii/tools](https://github.com/andbardii/tools).
 2. **Clonazione**:
    ```sh
-   git clone https://github.com/<IL_TUO_USERNAME>/open-broker-remover.git
+   git clone https://github.com/<IL_TUO_USERNAME>/tools.git
+   cd tools/privacy-helper
    ```
 3. **Crea un Branch**:
    ```sh
@@ -208,3 +212,9 @@ Puoi modificare il codice seguendo il classico flusso di lavoro Git o lavorando 
 
 ## Licenza
 Questo progetto è distribuito sotto la licenza MIT.
+
+## Compatibilità con il nome precedente
+
+Per conservare l’accesso ai dati esistenti, il database mantiene il nome `open-broker-remover.db` e il volume Docker mantiene il nome `open-broker-data`. Il cambio di nome del progetto non migra né elimina questi dati.
+
+La cronologia Git originale è conservata nel tag `migration/privacy-helper`: vedi [MIGRATION.md](../MIGRATION.md). La [licenza MIT](LICENSE) originale resta valida.
