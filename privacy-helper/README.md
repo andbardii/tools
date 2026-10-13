@@ -1,6 +1,6 @@
 # Privacy Helper
 
-Strumento della raccolta [**Tools**](../README.md), in precedenza **Open Broker Remover**. La versione corrente si trova in `andbardii/tools`, cartella `privacy-helper/`; la repository separata è conservata come archivio storico.
+Strumento della raccolta [**Tools**](../README.md), in precedenza **Open Broker Remover**. La versione corrente si trova in `andbardii/tools`, cartella `privacy-helper/`; la repository separata è stata eliminata dopo la verifica della migrazione.
 
 [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
@@ -221,4 +221,4 @@ Questo progetto è distribuito sotto la licenza MIT.
 
 Per conservare l’accesso ai dati esistenti, il database mantiene il nome `open-broker-remover.db` e il volume Docker mantiene il nome `open-broker-data`. Il cambio di nome del progetto non migra né elimina questi dati.
 
-La cronologia Git originale è conservata nel tag `migration/privacy-helper`: vedi [MIGRATION.md](../MIGRATION.md). La [licenza MIT](LICENSE) originale resta valida.
+La cronologia Git originale è conservata nel tag `migration/privacy-helper`: vedi [cronologia della raccolta](../README.md#provenienza-e-cronologia). La [licenza MIT](LICENSE) originale resta valida.
