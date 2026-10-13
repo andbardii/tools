@@ -253,6 +253,13 @@ try {
 
 // Database operations
 export const dbService = {
+  deleteAllData: (): void => {
+    db.transaction(() => {
+      db.prepare('DELETE FROM requests').run();
+      db.prepare('DELETE FROM brokers').run();
+      db.prepare('UPDATE encryption_status SET enabled = 0, initialized = 0').run();
+    })();
+  },
   // Request operations
   getRequests: async (): Promise<DataRequest[]> => {
     const rows = db.prepare('SELECT * FROM requests').all() as (RequestRow & { encrypted: number })[];
@@ -413,7 +420,7 @@ export const dbService = {
   },
   
   updateRequest: async (id: string, updates: Partial<DataRequest>): Promise<DataRequest | undefined> => {
-    const currentRequest = dbService.getRequestById(id);
+    const currentRequest = await dbService.getRequestById(id);
     if (!currentRequest) return undefined;
     
     const now = new Date().toISOString();
@@ -456,7 +463,7 @@ export const dbService = {
       }
       
       // Build the dynamic update query
-      const fields = Object.keys(updateData).filter(key => key !== 'id');
+      const fields = Object.keys(updateData).filter(key => ['brokerName', 'status', 'userEmail', 'responseContent', 'metadata', 'dateUpdated'].includes(key));
       if (fields.length === 0) return currentRequest;
       
       const setClause = fields.map(field => `${field} = ?`).join(', ');

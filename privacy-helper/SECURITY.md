@@ -9,5 +9,3 @@ Per segnalare una vulnerabilità, usa la sezione **Security** della repository T
 ## Dati locali
 
 Il database e le chiavi possono contenere dati sensibili. Non aggiungere a Git file `.env`, database, esportazioni personali, chiavi di crittografia o backup. Conserva separatamente una copia sicura dei dati e delle chiavi prima di modificare l’installazione.
-
-Il cambio di nome da Open Broker Remover a Privacy Helper conserva i nomi esistenti del database e del volume Docker, come descritto nel [README](README.md).

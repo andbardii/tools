@@ -185,45 +185,18 @@ class AutomationService {
 
   // Send automated request to a data broker
   async sendRequest(url: string, formData: Record<string, string>): Promise<AutomationResult> {
-    console.log(`Sending automated request to ${url}`, formData);
-    
-    // Validate URL before proceeding
-    const sanitizedUrl = validateAndSanitizeUrl(url);
-    if (!sanitizedUrl) {
-      return {
-        success: false,
-        message: 'Invalid or disallowed URL',
-        timestamp: new Date().toISOString()
-      };
-    }
-    
-    // Simulate processing time
-    await new Promise(resolve => setTimeout(resolve, 2500));
-    
-    // Generate a fake screenshot (base64 data)
-    const screenshot = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
-    
-    // Simulate a successful request
     return {
-      success: true,
-      message: `Successfully sent request to ${url}`,
-      timestamp: new Date().toISOString(),
-      screenshot: screenshot
+      success: false,
+      message: 'Automatic submission is not implemented. Submit the request manually on the broker website.',
+      timestamp: new Date().toISOString()
     };
   }
 
   // Fill form using automation (simulated for demo)
   async fillForm(url: string, fields: FormField[]): Promise<AutomationResult> {
-    // This is a mock implementation - in a real app, this would use a headless browser
-    console.log(`Simulating form fill at ${url} with ${fields.length} fields`);
-    
-    // Simulate processing time
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Simulate a successful form submission
     return {
-      success: true,
-      message: `Successfully submitted form to ${url}`,
+      success: false,
+      message: 'Automatic form submission is not implemented. No request was sent.',
       timestamp: new Date().toISOString()
     };
   }

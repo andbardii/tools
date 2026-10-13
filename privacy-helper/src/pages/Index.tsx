@@ -3,6 +3,10 @@ import AppLayout from '@/components/AppLayout';
 import Dashboard from '@/components/Dashboard';
 import Privacy from '@/pages/Privacy';
 import Requests from '@/pages/Requests';
+import FindBrokers from '@/pages/FindBrokers';
+import NewRequest from '@/pages/NewRequest';
+import TrackRequest from '@/pages/TrackRequest';
+import EmailMonitor from '@/pages/EmailMonitor';
 import EmailSetup from '@/components/EmailSetup';
 import SecuritySetup from '@/components/SecuritySetup';
 import DataBrokerManager from '@/components/DataBrokerManager';
@@ -25,41 +29,29 @@ const Index = () => {
   const { t } = useLanguage();
   
   useEffect(() => {
-    // Check if it's the first visit
-    const tutorialCompleted = localStorage.getItem('tutorial_completed');
-    if (!tutorialCompleted) {
-      setShowTutorial(true);
-    }
-
-    const loadRequests = async () => {
-      setIsLoading(true);
-      try {
-        const data = await db.getRequests();
-        setRequests(data || []);
-      } catch (error) {
-        console.error('Error loading requests:', error);
-        toast({
-          title: "Error",
-          description: "Failed to load requests data",
-          variant: "destructive",
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
-    loadRequests();
+    if (!localStorage.getItem('tutorial_completed')) setShowTutorial(true);
   }, []);
-  
+
+  // Refresh dashboard totals on return without remounting forms on other tabs.
+  useEffect(() => {
+    if (activeTab !== "dashboard") return;
+    let active = true;
+    setIsLoading(true);
+    db.getRequests()
+      .then(data => { if (active) setRequests(data); })
+      .catch(error => {
+        if (!active) return;
+        console.error('Error loading requests:', error);
+        toast({ title: 'Error', description: 'Failed to load requests data', variant: 'destructive' });
+      })
+      .finally(() => { if (active) setIsLoading(false); });
+    return () => { active = false; };
+  }, [activeTab]);
+
   const handleTabChange = (tab: string) => {
-    setIsContentLoading(true);
     setActiveTab(tab);
-    // Simulate a brief loading state when changing tabs
-    setTimeout(() => {
-      setIsContentLoading(false);
-    }, 300);
   };
-  
+
   // Improved handleCreateRequest with proper error handling and validation
   const handleCreateRequest = async (data: {
     brokerName: string;
@@ -210,7 +202,7 @@ const Index = () => {
   };
   
   const renderContent = () => {
-    if (isLoading) {
+    if (isLoading && activeTab === "dashboard") {
       return (
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
@@ -233,6 +225,14 @@ const Index = () => {
     }
     
     switch (activeTab) {
+      case 'find-brokers':
+        return <FindBrokers onTabChange={handleTabChange} />;
+      case 'new-request':
+        return <NewRequest onTabChange={handleTabChange} />;
+      case 'track-requests':
+        return <TrackRequest onTabChange={handleTabChange} />;
+      case 'email-monitor':
+        return <EmailMonitor onTabChange={handleTabChange} />;
       case "dashboard":
         return (
           <>

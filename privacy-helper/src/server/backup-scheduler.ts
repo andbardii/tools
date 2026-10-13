@@ -3,6 +3,7 @@ import { config } from './config';
 import { logger } from './logger';
 
 class BackupScheduler {
+  private initialTimer: NodeJS.Timeout | null = null;
   private timer: NodeJS.Timeout | null = null;
 
   constructor() {
@@ -19,7 +20,7 @@ class BackupScheduler {
     const intervalMs = config.database.backup.intervalSeconds * 1000;
     
     // Run first backup after 1 minute to allow system to initialize
-    setTimeout(() => {
+    this.initialTimer = setTimeout(() => {
       this.runBackup();
       
       // Then start regular interval
@@ -43,6 +44,7 @@ class BackupScheduler {
   }
 
   public stop(): void {
+    if (this.initialTimer) clearTimeout(this.initialTimer);
     if (this.timer) {
       clearInterval(this.timer);
       this.timer = null;

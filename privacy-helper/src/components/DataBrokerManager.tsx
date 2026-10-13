@@ -28,7 +28,7 @@ import { Trash, Plus } from "lucide-react";
 
 const DataBrokerManager = () => {
   const [newBroker, setNewBroker] = useState<Omit<DataBroker, 'id'>>({
-    name: '',
+    category: 'other', optOutMethod: 'form', dataTypes: [], difficulty: 'medium', name: '',
     optOutUrl: ''
   });
   const [formErrors, setFormErrors] = useState<{
@@ -49,7 +49,7 @@ const DataBrokerManager = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['brokers'] });
       toast({ title: "Success", description: "Data broker added successfully" });
-      setNewBroker({ name: '', optOutUrl: '' });
+      setNewBroker({ category: 'other', optOutMethod: 'form', dataTypes: [], difficulty: 'medium', name: '', optOutUrl: '' });
       setIsDialogOpen(false);
     },
     onError: () => {

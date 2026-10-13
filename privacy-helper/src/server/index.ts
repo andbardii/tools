@@ -10,10 +10,13 @@ import { backupRouter } from './routes/backup';
 import { config } from './config';
 import { logger } from './logger';
 import fs from 'fs';
+import { z } from 'zod';
+import { backupScheduler } from './backup-scheduler';
 
 // Create Express server
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = config.server.port;
+const clientDir = path.resolve(__dirname, '../../../../dist');
 
 // Security middlewares
 // Apply helmet for security headers
@@ -21,10 +24,10 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://cdn.gpteng.co", "'unsafe-inline'", "'unsafe-eval'"],
+      scriptSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https://lovable.dev"],
-      connectSrc: ["'self'", "https://cdn.gpteng.co", "http://localhost:3001"],
+      connectSrc: ["'self'"],
       fontSrc: ["'self'"],
       objectSrc: ["'none'"],
       mediaSrc: ["'self'"],
@@ -60,98 +63,14 @@ const strictLimiter = rateLimit({
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000'],
+  origin: ['http://localhost:3000', 'http://localhost:8080'],
   credentials: true
 }));
 app.use(express.json({ limit: '100kb' })); // Limit payload size
 app.use(morgan('dev'));
 
-// Configure MIME types
-express.static.mime.define({
-  'application/javascript': ['js'],
-  'text/css': ['css']
-});
-
-// Direct asset handlers for assets folder
-app.get('/assets/*', (req, res, next) => {
-  try {
-    const requestedPath = req.path;
-    // Normalize and validate the path
-    const normalizedPath = path.normalize(requestedPath).replace(/^(\.\.[/\\])+/, '');
-    const assetPath = path.join(__dirname, 'client', normalizedPath);
-    
-    // Ensure the requested file is within the assets directory using realpath
-    const clientDir = path.resolve(path.join(__dirname, 'client'));
-    const realAssetPath = path.resolve(assetPath);
-    
-    if (!realAssetPath.startsWith(clientDir)) {
-      logger.error(`Attempted directory traversal: ${requestedPath}`);
-      return res.status(403).json({ error: 'Access denied' });
-    }
-
-    // Strict file type validation with content type mapping
-    const ext = path.extname(assetPath).toLowerCase();
-    const contentTypes: Record<string, string> = {
-      '.js': 'application/javascript',
-      '.css': 'text/css',
-      '.map': 'application/json'
-    };
-
-    if (!contentTypes[ext]) {
-      logger.error(`Invalid file type requested: ${ext}`);
-      return res.status(403).json({ error: 'Invalid file type' });
-    }
-
-    // Set content type from our strict mapping
-    res.type(contentTypes[ext]);
-
-    // Use sendFile with proper options
-    res.sendFile(realAssetPath, {
-      dotfiles: 'deny',
-      headers: {
-        'X-Content-Type-Options': 'nosniff'
-      }
-    }, err => {
-      if (err) {
-        logger.error(`Error serving asset: ${requestedPath}`, err);
-        next(err);
-      }
-    });
-  } catch (error) {
-    logger.error('Error handling asset request:', error);
-    next(error);
-  }
-});
-
-// Static file serving with security checks
-app.use((req, res, next) => {
-  try {
-    const staticDir = path.resolve(path.join(__dirname, 'client'));
-    const requestedPath = req.path;
-    const normalizedPath = path.normalize(requestedPath).replace(/^(\.\.[/\\])+/, '');
-    const fullPath = path.resolve(path.join(staticDir, normalizedPath));
-
-    // Ensure the requested file is within the static directory using realpath
-    if (!fullPath.startsWith(staticDir)) {
-      logger.error(`Attempted directory traversal: ${requestedPath}`);
-      return res.status(403).json({ error: 'Access denied' });
-    }
-
-    next();
-  } catch (error) {
-    logger.error('Error in static file middleware:', error);
-    next(error);
-  }
-}, express.static(path.join(__dirname, 'client'), {
-  dotfiles: 'deny',
-  etag: true,
-  index: false,
-  maxAge: '1h',
-  lastModified: true,
-  setHeaders: (res) => {
-    res.set('X-Content-Type-Options', 'nosniff');
-  }
-}));
+// Express handles path containment, MIME types and all Vite asset formats.
+app.use(express.static(clientDir, { dotfiles: 'deny', index: false, maxAge: '1h' }));
 
 // API Routes
 app.get('/api/health', async (req, res) => {
@@ -230,20 +149,28 @@ app.delete('/api/brokers/:id', strictLimiter, (req, res) => {
   }
 });
 
-app.post('/api/brokers/search', (req, res) => {
+app.post('/api/brokers/search', async (req, res) => {
   try {
     const { email } = req.body;
-    if (!email) {
+    if (!z.string().email().safeParse(email).success) {
       return res.status(400).json({ error: 'Email is required' });
     }
     
-    const brokers = dbService.findDataBrokersForEmail(email);
+    const brokers = await dbService.findDataBrokersForEmail(email);
     res.json(brokers);
   } catch (error) {
     console.error('Error searching brokers:', error);
     res.status(500).json({ error: 'Failed to search data brokers' });
   }
 });
+
+const requestSchema = z.object({
+  brokerName: z.string().trim().min(1).max(200),
+  status: z.enum(['pending', 'sent', 'responded', 'completed']),
+  userEmail: z.string().email().max(320),
+  responseContent: z.string().max(50000).optional(),
+  metadata: z.string().max(50000).optional(),
+}).strict();
 
 // Requests API
 app.get('/api/requests', async (req, res) => {
@@ -272,7 +199,9 @@ app.get('/api/requests/:id', async (req, res) => {
 
 app.post('/api/requests', strictLimiter, async (req, res) => {
   try {
-    const request = await dbService.createRequest(req.body);
+    const parsed = requestSchema.safeParse(req.body);
+    if (!parsed.success) return res.status(400).json({ error: 'Invalid request data' });
+    const request = await dbService.createRequest(parsed.data);
     res.status(201).json(request);
   } catch (error) {
     console.error('Error creating request:', error);
@@ -282,7 +211,9 @@ app.post('/api/requests', strictLimiter, async (req, res) => {
 
 app.put('/api/requests/:id', strictLimiter, async (req, res) => {
   try {
-    const request = await dbService.updateRequest(req.params.id, req.body);
+    const parsed = requestSchema.partial().safeParse(req.body);
+    if (!parsed.success) return res.status(400).json({ error: 'Invalid request updates' });
+    const request = await dbService.updateRequest(req.params.id, parsed.data);
     if (request) {
       res.json(request);
     } else {
@@ -377,30 +308,11 @@ app.use('/api/backups', strictLimiter, backupRouter);
 // Add data deletion endpoint
 app.post('/api/settings/delete-all-data', strictLimiter, async (req, res) => {
   try {
-    // Delete database
-    if (fs.existsSync(path.join(config.storage.dataDir, 'open-broker-remover.db'))) {
-      await fs.promises.unlink(path.join(config.storage.dataDir, 'open-broker-remover.db'));
+    // Clear rows through the open connection so later writes remain persistent.
+    dbService.deleteAllData();
+    for (const file of await fs.promises.readdir(config.storage.backupDir).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return []; throw error; })) {
+      if (/^[a-zA-Z0-9._-]+\.db$/.test(file)) await fs.promises.unlink(path.join(config.storage.backupDir, file));
     }
-
-    // Delete backups
-    if (fs.existsSync(config.storage.backupDir)) {
-      const files = await fs.promises.readdir(config.storage.backupDir);
-      await Promise.all(files.map(file => 
-        fs.promises.unlink(path.join(config.storage.backupDir, file))
-      ));
-      await fs.promises.rmdir(config.storage.backupDir);
-    }
-
-    // Delete logs
-    if (fs.existsSync(config.storage.logDir)) {
-      const files = await fs.promises.readdir(config.storage.logDir);
-      await Promise.all(files.map(file => 
-        fs.promises.unlink(path.join(config.storage.logDir, file))
-      ));
-      await fs.promises.rmdir(config.storage.logDir);
-    }
-
-    // Reset encryption service
     await encryptionService.reset();
 
     res.json({ success: true, message: 'All data has been deleted' });
@@ -411,7 +323,7 @@ app.post('/api/settings/delete-all-data', strictLimiter, async (req, res) => {
 });
 
 // Add this immediately before the last route
-app.use('/backup', backupRouter);
+
 
 // Catch-all route to serve the React app
 app.get('*', (req, res) => {
@@ -421,10 +333,14 @@ app.get('*', (req, res) => {
   }
   
   // For all other routes, serve the index.html for client-side routing
-  res.sendFile(path.join(__dirname, 'client', 'index.html'));
+  res.sendFile(path.join(clientDir, 'index.html'));
 });
 
+// Start configured backups and stop timers when shutting down.
+
+process.on('SIGTERM', () => { backupScheduler.stop(); process.exit(0); });
+
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, process.env.HOST || '127.0.0.1', () => {
   console.log(`Server running on port ${PORT}`);
 }); 

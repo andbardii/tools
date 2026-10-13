@@ -1,8 +1,6 @@
 import { db } from './database';
 import { apiClient } from './api';
 import { DataBroker, DataRequest } from './types';
-import fs from 'fs/promises';
-import path from 'path';
 
 // Configuration types
 export interface AppConfig {
@@ -45,7 +43,7 @@ export interface DiagnosticResult {
 
 // Default configuration
 const defaultConfig: AppConfig = {
-  apiUrl: 'http://localhost:3000/api',
+  apiUrl: '/api',
   maxRequestsPerDay: 50,
   enableAutomation: true,
   loggingLevel: 'info',
@@ -281,17 +279,24 @@ CMD ["npm", "start"]`;
         };
       }
       
-      // Process brokers
-      if (Array.isArray(data.data.brokers)) {
-        // In a real implementation, we would insert these into the database
-        console.log(`Would import ${data.data.brokers.length} brokers`);
+      if (!Array.isArray(data.data.brokers) || !Array.isArray(data.data.requests ?? [])) {
+        throw new Error('Brokers and requests must be arrays');
       }
-      
-      // Process requests
-      if (Array.isArray(data.data.requests)) {
-        console.log(`Would import ${data.data.requests.length} requests`);
+      for (const broker of data.data.brokers) {
+        if (typeof broker.name !== 'string' || typeof broker.optOutUrl !== 'string') throw new Error('Invalid broker');
       }
-      
+      for (const request of data.data.requests ?? []) {
+        if (typeof request.brokerName !== 'string' || typeof request.userEmail !== 'string') throw new Error('Invalid request');
+      }
+      const existingBrokers = await db.getDataBrokers();
+      const names = new Set(existingBrokers.map(broker => broker.name));
+      for (const { id, ...broker } of data.data.brokers) {
+        if (!names.has(broker.name)) { await db.addDataBroker(broker); names.add(broker.name); }
+      }
+      for (const { id, dateCreated, dateUpdated, encrypted, ...request } of data.data.requests ?? []) {
+        await db.createRequest(request);
+      }
+
       return { 
         success: true, 
         message: `Successfully imported ${data.data.brokers.length} brokers and ${data.data.requests?.length || 0} requests`

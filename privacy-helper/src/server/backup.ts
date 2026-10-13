@@ -33,7 +33,7 @@ function validatePath(targetPath: string, allowedDir: string): boolean {
   const resolvedTarget = path.resolve(normalizedTarget);
   const resolvedAllowed = path.resolve(normalizedAllowed);
   
-  return resolvedTarget.startsWith(resolvedAllowed);
+  return resolvedTarget.startsWith(resolvedAllowed + path.sep);
 }
 
 class BackupService {
@@ -172,7 +172,8 @@ class BackupService {
 
   public async restoreBackup(backupFile: string): Promise<void> {
     try {
-      const sanitizedFile = sanitizeFilename(backupFile);
+      if (!/^backup-[a-zA-Z0-9._-]+\.db$/.test(backupFile)) throw new Error('Invalid backup filename');
+      const sanitizedFile = backupFile;
       const sourcePath = path.join(this.backupDir, sanitizedFile);
       
       // Validate the source path
