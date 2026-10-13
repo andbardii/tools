@@ -10,6 +10,10 @@ Privacy Helper è un progetto open-source in continuo sviluppo, nato per essere 
 ### 🛠️ In fase di sviluppo
 Il progetto è ancora in fase di sviluppo ed è nato dal desiderio di costruire qualcosa di utile nel tempo extra. Ogni contributo, suggerimento o richiesta è non solo ben accetto, ma incoraggiato! Apri una pull request o crea una issue per proporre modifiche, aggiungere funzionalità o segnalare bug.
 
+## Stato della build
+
+La verifica eseguita durante la migrazione ha rilevato import di pagine assenti nella versione originale, tra cui `src/pages/FindBrokers` e `src/pages/NewRequest`. `npm run build` attualmente non termina correttamente anche nel commit originale `e60bc70022`. I comandi sotto descrivono la configurazione del progetto; queste dipendenze mancanti devono essere ripristinate prima di ottenere una build utilizzabile. La migrazione e il cambio di nome non correggono questo problema preesistente.
+
 ## Indice
 - [Funzionalità Principali](#funzionalita-principali)
 - [Tecnologie Utilizzate](#tecnologie-utilizzate)
