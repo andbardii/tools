@@ -12,6 +12,7 @@ Raccolta personale di strumenti e script per privacy, automazione web e gestione
 | [sitemap-generator](sitemap-generator/) | Generazione di sitemap XML a partire da una lista di URL. | Node.js, sitemap |
 | [macbook-generics](macbook-generics/) | Script personali di configurazione e manutenzione di macOS. | Zsh |
 | [touchscreen](touchscreen/) | Fa funzionare i touchscreen USB generici su macOS, trasformando il tocco in mouse. | Swift, IOKit HID, Node.js |
+| [kakashi](kakashi/) | Guarda la webcam e, al Sennen Goroshi tenuto 2 secondi, ti disconnette dalla call chiudendo la scheda o l'app. | Swift, Vision, AVFoundation, Node.js |
 
 ## Utilizzo
 
