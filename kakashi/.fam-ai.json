@@ -1,7 +1,7 @@
 {
   "nome": "kakashi",
-  "avvia": "/bin/zsh -ic \"run kakashi\"",
-  "ferma": "/bin/zsh -ic \"stop kakashi\"",
+  "avvia": "node kakashi.mjs start",
+  "ferma": "node kakashi.mjs stop",
   "stato": "node kakashi.mjs status",
   "descrizione": "Effetti con gesti sulla webcam nelle call",
   "scheda": "Guarda la webcam e reagisce a gesti (pugni che si aprono, dita alla bocca, sopracciglio, occhiali): sparisci dalla call, effetto Real Stoner, zoom «eh?», trasformazione. Passa da OBS (camera virtuale); tarature con variabili KAKASHI_*.",
@@ -21,7 +21,7 @@
     {
       "nome": "readme",
       "tipo": "file",
-      "percorso": "/Users/andredhat/Documents/Coding/tools/kakashi/README.md",
+      "percorso": "README.md",
       "descrizione": "Gesti, tarature e uso",
       "max_byte": 8000
     },

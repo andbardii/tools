@@ -1,7 +1,7 @@
 {
   "nome": "touch",
-  "avvia": "/bin/zsh -ic \"run touch\"",
-  "ferma": "/bin/zsh -ic \"stop touch\"",
+  "avvia": "node touchscreen.mjs start",
+  "ferma": "node touchscreen.mjs stop",
   "stato": "node touchscreen.mjs status",
   "descrizione": "Driver per touchscreen USB generici su macOS",
   "scheda": "Fa funzionare su macOS i touchscreen USB generici (digitizer HID): il tocco diventa movimento e click sullo schermo scelto. Driver in Swift, serve il permesso Monitoraggio input.",
@@ -16,7 +16,7 @@
     {
       "nome": "readme",
       "tipo": "file",
-      "percorso": "/Users/andredhat/Documents/Coding/tools/touchscreen/README.md",
+      "percorso": "README.md",
       "descrizione": "Uso, permessi e requisiti"
     },
     {
