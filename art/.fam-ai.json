@@ -1,0 +1,27 @@
+{
+  "nome": "art",
+  "avvia": "/bin/zsh -ic \"run art\"",
+  "ferma": "/bin/zsh -ic \"stop art\"",
+  "descrizione": "Studio per ambientare un quadro su una parete",
+  "scheda": "Studio locale (porta 4322, solo su questo Mac) per ambientare la foto di un quadro su una parete ed esportarla per Instagram: quadrato, storia, verticale, PNG a 1x/2x/4x. Nessun account né upload.",
+  "azioni": {
+    "controlla": {
+      "comando": "npm run check",
+      "descrizione": "Verifica la sintassi dei sorgenti",
+      "effetti": "nessuno"
+    }
+  },
+  "dati": [
+    {
+      "nome": "readme",
+      "tipo": "file",
+      "percorso": "/Users/andredhat/Documents/Coding/tools/art/README.md",
+      "descrizione": "Uso, formati e porta"
+    }
+  ],
+  "contesto": {
+    "automatici": [
+      "readme"
+    ]
+  }
+}

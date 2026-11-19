@@ -1,0 +1,40 @@
+{
+  "nome": "kakashi",
+  "avvia": "/bin/zsh -ic \"run kakashi\"",
+  "ferma": "/bin/zsh -ic \"stop kakashi\"",
+  "stato": "node kakashi.mjs status",
+  "descrizione": "Effetti con gesti sulla webcam nelle call",
+  "scheda": "Guarda la webcam e reagisce a gesti (pugni che si aprono, dita alla bocca, sopracciglio, occhiali): sparisci dalla call, effetto Real Stoner, zoom «eh?», trasformazione. Passa da OBS (camera virtuale); tarature con variabili KAKASHI_*.",
+  "azioni": {
+    "log": {
+      "comando": "node kakashi.mjs log",
+      "descrizione": "Mostra il log",
+      "effetti": "nessuno"
+    },
+    "autotest": {
+      "comando": "node kakashi.mjs selftest",
+      "descrizione": "Prova il riconoscimento senza camera",
+      "effetti": "lieve"
+    }
+  },
+  "dati": [
+    {
+      "nome": "readme",
+      "tipo": "file",
+      "percorso": "/Users/andredhat/Documents/Coding/tools/kakashi/README.md",
+      "descrizione": "Gesti, tarature e uso",
+      "max_byte": 8000
+    },
+    {
+      "nome": "stato",
+      "tipo": "comando",
+      "comando": "node kakashi.mjs status",
+      "descrizione": "Se è attivo"
+    }
+  ],
+  "contesto": {
+    "automatici": [
+      "stato"
+    ]
+  }
+}
