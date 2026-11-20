@@ -1,6 +1,6 @@
 # Art
 
-Piccolo studio locale per ambientare la foto di un quadro su una parete ed esportarla per Instagram. Nessuna dipendenza, account o upload: le immagini vengono elaborate nel browser e non vengono inviate al server. Richiede Node.js 18 o successivo e un browser moderno.
+Piccolo studio locale per ambientare la foto di un quadro su una parete ed esportarla per Instagram. Nessuna dipendenza, account o upload: le immagini vengono elaborate nel browser e non lasciano questo computer. Richiede Node.js 18 o successivo e un browser moderno.
 
 ```sh
 run art
@@ -10,6 +10,15 @@ stop art
 Dopo l'installazione dei comandi shell, apri un nuovo terminale oppure esegui `source ~/.zshrc`.
 
 Avvio alternativo da questa cartella: `node art.mjs start`; arresto: `node art.mjs stop`. `ART_PORT=4401 run art` cambia porta (usa la stessa porta per stop). `npm start` esegue il server in primo piano.
+
+## Cataloghi di foto collegati
+
+Nella sezione **Cataloghi** puoi collegare una o più cartelle di foto del Mac e scegliere il quadro (o lo sfondo) direttamente da lì, senza ricaricarlo a mano.
+
+- **＋ Collega cartella** apre la finestra di scelta di macOS.
+- Si sfogliano le sottocartelle, si cerca per nome e si sceglie se usare la foto come **Quadro** o **Sfondo**. Le anteprime sono miniature generate con `sips` e tenute in `~/.cache/art/anteprime`; l'esportazione usa sempre il file originale.
+- I collegamenti stanno in `~/.config/art/cataloghi.json`. **Scollega** toglie solo il collegamento: cartelle e foto non vengono toccate. Art legge e basta, non scrive mai nelle cartelle collegate.
+- Formati: JPG, PNG, WebP. Il server ascolta solo su `127.0.0.1`, controlla l'intestazione `Host` e rifiuta ogni percorso fuori dalle cartelle collegate (anche tramite link simbolici).
 
 ## Utilizzo
 

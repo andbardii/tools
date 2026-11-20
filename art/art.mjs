@@ -23,4 +23,5 @@ if(action==='stop'){
  if(!ready){console.error(`Art non avviato: porta ${port} occupata o errore. Log: ${log}`);process.exitCode=1;}
  else{writeFileSync(pidfile,String(child.pid));console.log(`Art avviato: ${url}`);browser();}
  }
-}else{console.error('Uso: node art.mjs [start|stop]');process.exitCode=1;}
+}else if(action==='status'){const pid=ownedPid();console.log(pid?`Art attivo (pid ${pid}): ${url}`:'Art fermo.');
+}else{console.error('Uso: node art.mjs [start|stop|status]');process.exitCode=1;}

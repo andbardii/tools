@@ -3,7 +3,8 @@
   "avvia": "node art.mjs start",
   "ferma": "node art.mjs stop",
   "descrizione": "Studio per ambientare un quadro su una parete",
-  "scheda": "Studio locale (porta 4322, solo su questo Mac) per ambientare la foto di un quadro su una parete ed esportarla per Instagram: quadrato, storia, verticale, PNG a 1x/2x/4x. Nessun account né upload.",
+  "attivita": {"porta": 4322},
+  "scheda": "Studio locale (porta 4322, solo su questo Mac) per ambientare la foto di un quadro su una parete ed esportarla per Instagram: quadrato, storia, verticale, PNG a 1x/2x/4x. Nessun account né upload. Si possono collegare cartelle di foto (cataloghi) e scegliere il quadro da lì.",
   "azioni": {
     "controlla": {
       "comando": "npm run check",
