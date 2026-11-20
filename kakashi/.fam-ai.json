@@ -4,6 +4,7 @@
   "ferma": "node kakashi.mjs stop",
   "stato": "node kakashi.mjs status",
   "descrizione": "Effetti con gesti sulla webcam nelle call",
+  "attivita": {"attivo": ["attivo"], "fermo": ["fermo"]},
   "scheda": "Guarda la webcam e reagisce a gesti (pugni che si aprono, dita alla bocca, sopracciglio, occhiali): sparisci dalla call, effetto Real Stoner, zoom «eh?», trasformazione. Passa da OBS (camera virtuale); tarature con variabili KAKASHI_*.",
   "azioni": {
     "log": {

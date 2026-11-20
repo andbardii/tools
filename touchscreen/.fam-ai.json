@@ -4,6 +4,7 @@
   "ferma": "node touchscreen.mjs stop",
   "stato": "node touchscreen.mjs status",
   "descrizione": "Driver per touchscreen USB generici su macOS",
+  "attivita": {"attivo": ["attivo"], "fermo": ["fermo"]},
   "scheda": "Fa funzionare su macOS i touchscreen USB generici (digitizer HID): il tocco diventa movimento e click sullo schermo scelto. Driver in Swift, serve il permesso Monitoraggio input.",
   "azioni": {
     "schermi": {
